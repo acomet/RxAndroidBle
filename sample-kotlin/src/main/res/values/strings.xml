@@ -5,7 +5,7 @@
     <string name="button_start_scan">Start scan</string>
     <string name="button_stop_scan">Stop scan</string>
     <string name="mac_address">MAC: %s</string>
-    <string name="connection_state">State: %s</string>
+    <string name="connection_state">状态: %s</string>
     <string name="format_rssi">RSSI: %d</string>
     <string name="prefix_hex">0x</string>
     <string name="button_disconnect">Disconnect</string>

@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.polidea.rxandroidble2.RxBleConnection
 import com.polidea.rxandroidble2.RxBleDevice
+import com.polidea.rxandroidble2.internal.RxBleLog
+import com.polidea.rxandroidble2.internal.logger.LoggerUtil
 import com.polidea.rxandroidble2.samplekotlin.R
 import com.polidea.rxandroidble2.samplekotlin.SampleApplication
 import com.polidea.rxandroidble2.samplekotlin.util.*
@@ -79,8 +81,13 @@ class ConnectionExampleActivity : AppCompatActivity() {
         bleDevice.establishConnection(autoconnect.isChecked)
             .observeOn(AndroidSchedulers.mainThread())
             .doFinally { dispose() }
-            .subscribe({ onConnectionReceived() }, { onConnectionFailure(it) })
-            .let { connectionDisposable = it }
+            .subscribe(
+                {
+                    onConnectionReceived()
+                },
+                {
+                    onConnectionFailure(it)
+                }).let { connectionDisposable = it }
     }
 
     @TargetApi(21 /* Build.VERSION_CODES.LOLLIPOP */)
@@ -96,9 +103,15 @@ class ConnectionExampleActivity : AppCompatActivity() {
         }
     }
 
-    private fun onConnectionFailure(throwable: Throwable) = showSnackbarShort("Connection error: $throwable")
+    private fun onConnectionFailure(throwable: Throwable) {
+        logger("---1---" + throwable.message)
+        RxBleLog.i("---2---" + throwable.message)
+        showSnackbarShort("Connection error: $throwable")
+    }
 
-    private fun onConnectionReceived() = showSnackbarShort("Connection received")
+    private fun onConnectionReceived() {
+        showSnackbarShort("Connection received")
+    }
 
     private fun onConnectionStateChange(newState: RxBleConnection.RxBleConnectionState) {
         connection_state.text = newState.toString()

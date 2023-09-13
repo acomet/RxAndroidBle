@@ -27,6 +27,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="十六进制数据"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/prefix_hex"
             android:textSize="14sp" />
 
@@ -37,11 +43,24 @@
             android:textSize="@dimen/text_size_standard" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/read_output"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_standard" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="字符串数据"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/read_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_standard" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,7 +79,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/edit_text_write_input"
             android:importantForAutofill="no"
-            android:inputType="numberDecimal"
             tools:targetApi="o" />
     </LinearLayout>
 

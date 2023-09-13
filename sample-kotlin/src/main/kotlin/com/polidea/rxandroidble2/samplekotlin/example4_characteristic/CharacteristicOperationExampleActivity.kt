@@ -11,10 +11,9 @@ import com.polidea.rxandroidble2.RxBleConnection
 import com.polidea.rxandroidble2.RxBleDevice
 import com.polidea.rxandroidble2.samplekotlin.R
 import com.polidea.rxandroidble2.samplekotlin.SampleApplication
-import com.polidea.rxandroidble2.samplekotlin.util.hasProperty
+import com.polidea.rxandroidble2.samplekotlin.util.*
 import com.polidea.rxandroidble2.samplekotlin.util.isConnected
 import com.polidea.rxandroidble2.samplekotlin.util.showSnackbarShort
-import com.polidea.rxandroidble2.samplekotlin.util.toHex
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -133,7 +132,13 @@ class CharacteristicOperationExampleActivity : AppCompatActivity() {
                 // out of the enclosing observable, which only performed notification setup
                 .flatMap { it }
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ onNotificationReceived(it) }, { onNotificationSetupFailure(it) })
+                .subscribe(
+                    {
+                        onNotificationReceived(it)
+                    },
+                    {
+                        onNotificationSetupFailure(it)
+                    })
                 .let { connectionDisposable.add(it) }
         }
     }
@@ -149,7 +154,11 @@ class CharacteristicOperationExampleActivity : AppCompatActivity() {
 
     private fun onWriteFailure(throwable: Throwable) = showSnackbarShort("Write error: $throwable")
 
-    private fun onNotificationReceived(bytes: ByteArray) = showSnackbarShort("Change: ${bytes.toHex()}")
+    private fun onNotificationReceived(bytes: ByteArray) {
+        logger("onNotificationReceived ， ${String(bytes)}")
+        showSnackbarShort("Change: ${bytes.toHex()}")
+
+    }
 
     private fun onNotificationSetupFailure(throwable: Throwable) =
         showSnackbarShort("Notifications error: $throwable")

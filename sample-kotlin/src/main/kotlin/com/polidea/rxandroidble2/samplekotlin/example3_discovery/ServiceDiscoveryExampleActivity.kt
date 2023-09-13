@@ -57,7 +57,11 @@ class ServiceDiscoveryExampleActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { updateUI() }
             .doFinally { updateUI() }
-            .subscribe({ resultsAdapter.swapScanResult(it) }, { showSnackbarShort("Connection error: $it") })
+            .subscribe(
+                {
+                    resultsAdapter.swapScanResult(it)
+                },
+                { showSnackbarShort("Connection error: $it") })
             .let { discoveryDisposable.add(it) }
     }
 

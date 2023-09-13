@@ -13,9 +13,7 @@ import com.polidea.rxandroidble2.samplekotlin.R
 import com.polidea.rxandroidble2.samplekotlin.example3_discovery.DiscoveryResultsAdapter.ViewHolder
 import java.util.UUID
 
-internal class DiscoveryResultsAdapter(
-    private val onClickListener: (AdapterItem) -> Unit
-) : RecyclerView.Adapter<ViewHolder>() {
+internal class DiscoveryResultsAdapter(private val onClickListener: (AdapterItem) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
 
     class AdapterItem(val type: Int, val description: String, val uuid: UUID) {
         companion object {

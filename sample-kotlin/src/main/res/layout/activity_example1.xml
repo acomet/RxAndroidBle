@@ -6,22 +6,24 @@
     android:orientation="vertical"
     android:padding="@dimen/margin_standard">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_hello_bluetooth_world" />
 
     <Button
         android:id="@+id/background_scan_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_scan_in_background" />
 
     <Button
         android:id="@+id/scan_toggle_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_start_scan" />
+
+    <Button
+        android:id="@+id/long_write_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_example7" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/scan_results"

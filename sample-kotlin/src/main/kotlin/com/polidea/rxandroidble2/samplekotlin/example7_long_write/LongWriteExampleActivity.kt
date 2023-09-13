@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.polidea.rxandroidble2.RxBleConnection
+import com.polidea.rxandroidble2.internal.RxBleLog
 import com.polidea.rxandroidble2.samplekotlin.SampleApplication
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -65,10 +66,12 @@ class LongWriteExampleActivity : AppCompatActivity() {
                 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
                 { bytes ->
                     // react
+                    RxBleLog.i("long write success size: ${bytes.size}")
                 },
                 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
                 { throwable ->
                     // handle error
+                    RxBleLog.i("long write error msg: ${throwable.message}")
                 }
             )
             .let { longWriteDisposable = it }
@@ -77,10 +80,7 @@ class LongWriteExampleActivity : AppCompatActivity() {
     /**
      * Performs long write via given [connection], waiting for callbacks from device through [notifications].
      */
-    private fun performLongWrite(
-        connection: RxBleConnection,
-        notifications: Pair<Observable<ByteArray>, Observable<ByteArray>>
-    ): Observable<ByteArray> {
+    private fun performLongWrite(connection: RxBleConnection, notifications: Pair<Observable<ByteArray>, Observable<ByteArray>>): Observable<ByteArray> {
         val (deviceCallback0, deviceCallback1) = notifications
 
         return connection.createNewLongWriteBuilder() // create a new long write builder
@@ -125,9 +125,7 @@ class LongWriteExampleActivity : AppCompatActivity() {
 /**
  * Sets up notifications from both characteristics and combines them into one [Observable].
  */
-private fun setupNotifications(
-    connection: RxBleConnection
-): Observable<Pair<Observable<ByteArray>, Observable<ByteArray>>> =
+private fun setupNotifications(connection: RxBleConnection): Observable<Pair<Observable<ByteArray>, Observable<ByteArray>>> =
     Observables.combineLatest(
         connection.setupNotification(DEVICE_CALLBACK_0),
         connection.setupNotification(DEVICE_CALLBACK_1)

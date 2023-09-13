@@ -20,8 +20,9 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/autoconnect"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:hint="@string/toggle_autoconnect" />
 
         <Button
@@ -46,8 +47,9 @@
 
         <EditText
             android:id="@+id/newMtu"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:importantForAutofill="no"
             android:inputType="number"
             tools:targetApi="o" />
